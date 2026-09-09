@@ -10,6 +10,10 @@ Zmiana hasła: na stronie „Dla rodzica” wpisz nowe hasło w sekcji „Zmiana
 
 To jest bramka, nie zamek. Zasłania stronę przed kimś, kto trafi na adres przypadkiem, a `robots.txt` i `noindex` trzymają ją poza wyszukiwarkami. Darmowe GitHub Pages działa tylko z publicznego repozytorium, więc treść kursu jest widoczna dla każdego, kto trafi na to repo. Nie ma tu nic prywatnego: żadnego imienia, żadnych rozmów, żadnych danych dziecka.
 
+## Po wypchnięciu zmian
+
+GitHub Pages odświeża się w około minutę, ale przeglądarka trzyma stare `style.css` i pliki `.js` jeszcze do dziesięciu minut. Jeśli po `git push` strona wygląda po staremu, to nie znaczy, że zmiana nie weszła. Wciśnij `Ctrl` + `Shift` + `R`, żeby wymusić pobranie od nowa, albo po prostu wróć za dziesięć minut.
+
 ## Uruchomienie lokalne
 
 Dowolny serwer plików w katalogu projektu, na przykład:
