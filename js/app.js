@@ -178,7 +178,8 @@
     const rows = missions().map(m => `<tr><td><strong>${m.id}. ${esc(m.title)}</strong><br><span class="small muted">${esc(m.technique)}</span></td><td>${md(m.forParent && m.forParent.teaches || '')}</td><td>${md(m.forParent && m.forParent.ask || '')}</td></tr>`).join('');
     const table = `<div class="table-wrap"><table><thead><tr><th>Misja</th><th>Czego uczy</th><th>O co zapytać po misji</th></tr></thead><tbody>${rows}</tbody></table></div>`;
     const sections = (P.sections || []).map(s => `<section class="section"><h2>${esc(s.title)}</h2>${s.html || paras(s.paras)}${s.table ? table : ''}</section>`).join('');
-    const controls = `<section class="section"><h2>Ustawienia dla rodzica</h2><div class="card"><label class="switch"><input type="checkbox" data-act="unlock-all" ${state.unlockAll ? 'checked' : ''}> Odblokuj wszystkie misje naraz (domyślnie idą po kolei)</label><p class="small muted" style="margin:.8rem 0 0">Imię, kopia postępu i reset są w <a href="#/ustawienia">Ustawieniach</a>. Postęp zapisuje się tylko w tej przeglądarce.</p></div></section>`;
+    const controls = `<section class="section"><h2>Ustawienia dla rodzica</h2><div class="card"><label class="switch"><input type="checkbox" data-act="unlock-all" ${state.unlockAll ? 'checked' : ''}> Odblokuj wszystkie misje naraz (domyślnie idą po kolei)</label><p class="small muted" style="margin:.8rem 0 0">Imię, kopia postępu i reset są w <a href="#/ustawienia">Ustawieniach</a>. Postęp zapisuje się tylko w tej przeglądarce.</p></div></section>
+      <section class="section"><h2>Zmiana hasła</h2><div class="card"><div class="field"><label for="pw-new">Nowe hasło</label><input id="pw-new" type="text" maxlength="40" placeholder="np. nukacola" autocomplete="off" spellcheck="false"></div><button class="btn" type="button" data-act="pw-line">Pokaż linię do wklejenia</button><div id="pw-out"></div></div></section>`;
     return `<h1>${esc(P.title || 'Dla rodzica')}</h1>${intro}${sections}${controls}`;
   }
 
@@ -187,6 +188,7 @@
     return `<h1>Ustawienia</h1>
       <section class="section"><div class="card"><div class="field"><label for="name-in">Imię albo ksywka</label><input id="name-in" type="text" maxlength="30" value="${esc(name())}" placeholder="Jak mam do Ciebie mówić?"></div><button class="btn" type="button" data-act="save-name">Zapisz imię</button></div></section>
       <section class="section"><h2>Kopia postępu</h2><p class="muted">Postęp żyje w tej przeglądarce. Ten kod pozwala go przenieść na inny komputer albo odzyskać po wyczyszczeniu przeglądarki. Skopiuj i zachowaj, np. wyślij sobie w wiadomości.</p><div class="card"><label for="code-out">Twój kod zapisu</label><textarea id="code-out" readonly style="font-family:var(--mono);font-size:.85rem">${esc(code)}</textarea><div class="btn-row"><button class="btn small" type="button" data-copy="${esc(code)}">Kopiuj kod</button></div><hr><label for="code-in">Wczytaj kod zapisu</label><textarea id="code-in" placeholder="Wklej tu kod z innego komputera" style="font-family:var(--mono);font-size:.85rem"></textarea><div class="btn-row"><button class="btn small" type="button" data-act="import">Wczytaj</button></div></div></section>
+      <section class="section"><h2>Hasło</h2><div class="card"><p class="muted">Ta przeglądarka pamięta, że hasło zostało już wpisane. Zablokuj, jeśli chcesz, żeby strona zapytała o nie przy następnym otwarciu.</p><button class="btn ghost small" type="button" data-act="lock">Zablokuj stronę</button></div></section>
       <section class="section"><h2>Od nowa</h2><div class="card"><p class="muted">Kasuje zaliczone misje, kroki i Dziennik na tym komputerze. Imię zostaje.</p><button class="btn ghost small" type="button" data-act="reset">Wyzeruj postęp</button></div></section>`;
   }
 
@@ -238,6 +240,18 @@
     }
     if (act === 'import') {
       try { importCode($('#code-in').value); toast('Wczytane. Postęp przywrócony.'); render(); } catch (err) { toast(err.message); } return;
+    }
+    if (act === 'pw-line') {
+      const v = ($('#pw-new').value || '').trim();
+      if (!v) { toast('Wpisz nowe hasło.'); return; }
+      if (!A.gate) { toast('Bramka nie jest wczytana.'); return; }
+      const line = `  var HASH = '${A.gate.hash(v)}'; // hasło: ${v}`;
+      $('#pw-out').innerHTML = `<p class="small muted" style="margin:1rem 0 0">Wklej tę linię w pliku <code>js/gate.js</code>, w miejsce linii zaczynającej się od <code>var HASH</code>. Po zmianie każdy wpisuje nowe hasło jeszcze raz.</p>` + promptBlock(line, 'linia z hasłem');
+      return;
+    }
+    if (act === 'lock') {
+      if (A.gate) A.gate.lock();
+      location.reload(); return;
     }
     if (act === 'reset') {
       if (confirm('Na pewno wyzerować postęp na tym komputerze? Imię zostanie.')) { const n = state.name; state = fresh(); state.name = n; save(); toast('Wyzerowane.'); render(); } return;

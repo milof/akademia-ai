@@ -2,6 +2,14 @@
 
 Kurs 13 misji dla młodego człowieka, który chce sprawnie używać AI (ChatGPT na koncie rodzica) w codziennym życiu. Statyczna strona bez budowania: HTML, CSS i JavaScript, gotowa na GitHub Pages.
 
+## Hasło
+
+Wejście jest zamknięte hasłem **nukacola** (wielkie litery i spacje nie mają znaczenia). Wpisuje się je raz na danej przeglądarce. Przycisk „Zablokuj stronę” w Ustawieniach każe zapytać o nie ponownie.
+
+Zmiana hasła: na stronie „Dla rodzica” wpisz nowe hasło w sekcji „Zmiana hasła”, skopiuj wygenerowaną linię i wklej ją w `js/gate.js` w miejsce linii zaczynającej się od `var HASH`. Po zmianie wszyscy wpisują nowe hasło jeszcze raz.
+
+To jest bramka, nie zamek. Zasłania stronę przed kimś, kto trafi na adres przypadkiem, a `robots.txt` i `noindex` trzymają ją poza wyszukiwarkami. Darmowe GitHub Pages działa tylko z publicznego repozytorium, więc treść kursu jest widoczna dla każdego, kto trafi na to repo. Nie ma tu nic prywatnego: żadnego imienia, żadnych rozmów, żadnych danych dziecka.
+
 ## Uruchomienie lokalne
 
 Dowolny serwer plików w katalogu projektu, na przykład:
@@ -32,6 +40,7 @@ Postęp (zaliczone misje, odhaczone kroki, Dziennik) zapisuje się w `localStora
 
 - `index.html` – szkielet strony, ładuje treść i logikę
 - `css/style.css` – style
+- `js/gate.js` – bramka z hasłem (ładowana w `<head>`, zanim pokaże się treść)
 - `js/app.js` – routing (`#/misja/3`, `#/niezbednik`, `#/dziennik`, `#/rodzic`, `#/ustawienia`), zapis postępu, kopiowanie, animacja warstwy
 - `js/content/misje-*.js` – treść misji (każda misja to jeden obiekt)
 - `js/content/niezbednik.js` – karty technik

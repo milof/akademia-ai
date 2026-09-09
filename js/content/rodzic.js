@@ -19,6 +19,12 @@ window.AKADEMIA.parent = {
         '</ul>'
     },
     {
+      title: 'Hasło do strony',
+      html: '<p>Wejście na stronę jest zamknięte hasłem <strong>nukacola</strong>. Wielkie litery i spacje nie mają znaczenia. Dziecko wpisuje je raz na danym komputerze, potem przeglądarka pamięta. W Ustawieniach jest przycisk „Zablokuj stronę”, który każe wpisać hasło ponownie.</p>' +
+        '<p><strong>Powiedzmy sobie szczerze, co to hasło robi, a czego nie.</strong> Zasłania stronę przed kimś, kto trafi na adres przypadkiem, i razem z blokadą indeksowania trzyma ją poza wynikami wyszukiwarek. Nie jest zamkiem. Darmowe GitHub Pages działa tylko z publicznego repozytorium, więc treść kursu jest widoczna dla każdego, kto trafi na <a href="https://github.com/milof/akademia-ai" target="_blank" rel="noopener">samo repozytorium</a>. Nie ma tam nic prywatnego: żadnego imienia, żadnych rozmów, żadnych danych dziecka. Postęp i Dziennik zapisują się wyłącznie w przeglądarce na Waszym komputerze i nigdzie nie są wysyłane.</p>' +
+        '<p>Hasło możesz zmienić w każdej chwili. Wpisz nowe w polu na dole tej strony, skopiuj wygenerowaną linię i wklej ją w pliku <code>js/gate.js</code> w miejsce linii zaczynającej się od <code>var HASH</code>. Po zmianie wszyscy, łącznie z Tobą, wpisują nowe hasło jeszcze raz.</p>'
+    },
+    {
       title: 'Twoja rola',
       html: '<ul>' +
         '<li><strong>Bądź obok przy misjach z "Pokaż rodzicowi"</strong> (0, 2, 3, 4, 5, 8, 10, 11, 12). Resztę może robić sam, ale w pokoju, w którym jesteś.</li>' +
