@@ -156,8 +156,8 @@
     const nid = nextId();
     const cards = A.cards.slice().sort((a, b) => a.mission - b.mission).map(c => {
       const open = state.unlockAll || isDone(c.mission) || String(c.mission) === String(nid);
-      if (!open) return `<article class="tcard locked"><span class="eyebrow">Misja ${c.mission}</span><h3>${esc(c.title)}</h3><p class="when">Odblokujesz w misji ${c.mission}.</p></article>`;
-      return `<article class="tcard"><span class="eyebrow">Misja ${c.mission}</span><h3>${esc(c.title)}</h3><p class="when">${md(c.when)}</p>${c.prompt ? promptBlock(c.prompt, c.title) : ''}${c.more ? `<p class="small muted" style="margin:0">${md(c.more)}</p>` : ''}</article>`;
+      if (!open) return `<article class="tcard locked"><span class="eyebrow">Misja ${c.mission}</span><h2>${esc(c.title)}</h2><p class="when">Odblokujesz w misji ${c.mission}.</p></article>`;
+      return `<article class="tcard"><span class="eyebrow">Misja ${c.mission}</span><h2>${esc(c.title)}</h2><p class="when">${md(c.when)}</p>${c.prompt ? promptBlock(c.prompt, c.title) : ''}${c.more ? `<p class="small muted" style="margin:0">${md(c.more)}</p>` : ''}</article>`;
     }).join('');
     return `<h1>Niezbędnik</h1><p class="lead muted" style="max-width:60ch">Wszystkie techniki z misji w jednym miejscu. Wracaj tu, gdy nie wiesz, jak zapytać. Karty odblokowują się razem z misjami.</p><div class="btn-row" style="margin-bottom:1.5rem"><button class="btn ghost small" type="button" onclick="window.print()">Drukuj ściągę</button></div><div class="cards">${cards}</div>`;
   }

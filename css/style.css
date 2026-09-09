@@ -6,9 +6,10 @@
   --steel: #5B6B7A;
   --line: #D9DFE5;
   --filament: #F2620F;
-  --filament-deep: #C44A05;
+  --filament-deep: #BC4705;
+  --filament-darker: #9E3B04;
   --filament-soft: #FFEDE0;
-  --ok: #1F9D55;
+  --ok: #197E44;
   --ok-soft: #E3F5EA;
   --warn-soft: #FFF6D6;
   --display: "Bricolage Grotesque", "Lexend", system-ui, sans-serif;
@@ -43,7 +44,7 @@ h3 { font-size: 1.2rem; font-weight: 700; }
 p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
 a { color: var(--filament-deep); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-a:hover { color: var(--filament); }
+a:hover { color: var(--filament-darker); }
 ul, ol { padding-left: 1.4em; margin: 0 0 1em; }
 li { margin: .3em 0; }
 code { font-family: var(--mono); font-size: .92em; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: .05em .4em; }
@@ -89,8 +90,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 }
 .btn:hover { transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
-.btn.primary { background: var(--filament); border-color: var(--filament); color: #fff; }
-.btn.primary:hover { background: var(--filament-deep); border-color: var(--filament-deep); }
+.btn.primary { background: var(--filament-deep); border-color: var(--filament-deep); color: #fff; }
+.btn.primary:hover { background: var(--filament-darker); border-color: var(--filament-darker); }
 .btn.ghost { background: transparent; color: var(--ink); }
 .btn.ghost:hover { background: var(--paper); }
 .btn.small { padding: .4rem .8rem; font-size: .9rem; }
@@ -111,7 +112,9 @@ input[type=text], textarea {
   font: inherit; color: var(--ink); background: var(--paper); border: 2px solid var(--line); border-radius: var(--radius-sm);
   padding: .65rem .8rem; width: 100%; max-width: 100%;
 }
-input[type=text]:focus, textarea:focus { border-color: var(--filament); outline: none; }
+/* Bez outline: none. Ta regula jest dalej w pliku niz :focus-visible i ma wyzsza
+   specyficznosc, wiec zerowala obwodke fokusu w polach tekstowych. */
+input[type=text]:focus, textarea:focus { border-color: var(--filament); }
 textarea { min-height: 96px; resize: vertical; }
 label { font-weight: 600; display: block; margin-bottom: .35rem; }
 .field { margin-bottom: 1rem; }
@@ -152,7 +155,7 @@ a.mission-row:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
 .hex { width: 44px; height: 48px; display: grid; place-items: center; position: relative; font-family: var(--display); font-weight: 800; font-size: 1.1rem; color: var(--steel); }
 .hex svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hex .hex-bg { fill: var(--bed); stroke: var(--line); stroke-width: 2; }
-.hex.done { color: #fff; } .hex.done .hex-bg { fill: var(--filament); stroke: var(--filament); }
+.hex.done { color: #fff; } .hex.done .hex-bg { fill: var(--filament-deep); stroke: var(--filament-deep); }
 .hex.next { color: var(--filament-deep); } .hex.next .hex-bg { fill: var(--filament-soft); stroke: var(--filament); }
 .hex span { position: relative; }
 
@@ -200,7 +203,7 @@ a.mission-row:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
 .tcard { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.2rem; display: flex; flex-direction: column; gap: .5rem; }
 .tcard.locked { opacity: .55; background: transparent; }
-.tcard h3 { margin: 0; font-size: 1.05rem; }
+.tcard h2 { margin: 0; font-size: 1.05rem; }
 .tcard .when { color: var(--steel); font-size: .92rem; }
 .tcard .prompt { margin: .25rem 0 0; font-size: .88rem; }
 
@@ -271,3 +274,7 @@ html.locked body > *:not(#gate) { display: none !important; }
 /* Elementy nosne, nie proza: wiersz kroku, wiersz listy misji, wpis Dziennika
    i dymek rozmowy zostaja na pelnej szerokosci. */
 .main li.step, .main .mission-list li, .main .entries li, .main .bubble p { max-width: none; }
+
+/* Jasny pomaranczowy --filament zostaje znakiem rozpoznawczym: logo, obramowania,
+   warstwy postepu, ramka fokusu. Tam, gdzie kolor nosi tekst, uzywamy ciemniejszego
+   --filament-deep, bo bialy napis na jasnym pomaranczu ma kontrast 3.2 zamiast 4.5. */
