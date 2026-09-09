@@ -262,3 +262,12 @@ html.locked body > *:not(#gate) { display: none !important; }
 .gate-note { color: var(--steel); font-size: .85rem; margin: 1rem 0 0; }
 .gate-card.shake { animation: shake .3s ease; }
 @keyframes shake { 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
+
+/* ---- Komfortowa długość wiersza ----
+   Kolumna 900 px daje przy 17 px ponad 100 znaków w wierszu. Dla dziecka,
+   które czyta średnio chętnie, to za długo: oko gubi początek następnej linii.
+   Karty, tabele, prompty i siatki zostają szerokie, skracamy sam tekst do czytania. */
+.main p, .main .step-text, .main .tip, .main li { max-width: 52ch; }
+/* Elementy nosne, nie proza: wiersz kroku, wiersz listy misji, wpis Dziennika
+   i dymek rozmowy zostaja na pelnej szerokosci. */
+.main li.step, .main .mission-list li, .main .entries li, .main .bubble p { max-width: none; }
